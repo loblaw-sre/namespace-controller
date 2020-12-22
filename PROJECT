@@ -1,0 +1,14 @@
+domain: lblw.dev
+layout: go.kubebuilder.io/v3
+projectName: namespace-controller
+repo: github.com/loblaw-sre/namespace-controller
+resources:
+- crdVersion: v1
+  group: gial
+  kind: LNamespace
+  version: v1beta1
+  webhookVersion: v1
+version: 3-alpha
+plugins:
+  manifests.sdk.operatorframework.io/v2: {}
+  scorecard.sdk.operatorframework.io/v2: {}

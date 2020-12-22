@@ -1,0 +1,10 @@
+apiVersion: gial.lblw.dev/v1beta1
+kind: LNamespace
+metadata:
+  name: namespace-sample-2
+spec:
+  sudoers:
+    - name: john@loblaw.ca
+      kind: User
+    - name: alice@loblaw.ca
+      kind: User

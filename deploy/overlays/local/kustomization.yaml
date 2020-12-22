@@ -1,0 +1,41 @@
+###### [BILLING CONTROLLER]: TO INSTALL WITH BIGQUERY, UNCOMMENT ALL FIELDS WITH [BILLING CONTROLLER] BELOW ######
+###### Before proceeding, ensure you have placed the service account key
+###### inside of this folder. For more information, refer to
+###### docs/guides/install-billing-controller-on-local.md
+
+namePrefix: namespace-controller-
+namespace: namespace-controller-system
+resources:
+  - ../../default
+
+images:
+  - name: controller
+    newName: namespace-controller
+    newTag: local
+
+configMapGenerator:
+  - name: istio-config
+    namespace: system
+    literals:
+      - NC_DEFAULT_ISTIO_REVISION=istio-version-1
+  - name: bigquery-config
+    namespace: system
+# [BILLING CONTROLLER]: enables bigquery configuration such that billing controller can be activated.
+#     literals:
+#       - GOOGLE_APPLICATION_CREDENTIALS=/credentials/account.json
+#       # EDIT THESE. THESE SHOULD BE SPECIFIC TO YOUR LOCAL PLAYGROUND PROJECT
+#       - NC_BIGQUERY_DATASET_NAME=REDACTED # what dataset should hold the billing annotations? TODO(rsong): seed with opensource context
+#       - NC_PROJECT_ID=REDACTED # what's the ID of your playground project? TODO(rsong): seed with opensource context
+#       - NC_BIGQUERY_TABLE_NAME=ns_labels # what's table should hold the billing annotations?
+
+# [BILLING CONTROLLER]: creates bigquery credentials according to the account.json that should be in the local folder.
+# secretGenerator:
+#   - name: bigquery-credentials
+#     namespace: system
+#     files:
+#       - account.json
+
+# [BILLING CONTROLLER]: applies the aforementioned bigquery configmap and bigquery credentials
+# patchesStrategicMerge:
+#   - bigquery-patch.yaml
+

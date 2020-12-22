@@ -1,0 +1,18 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: namespace-sample-editor
+  labels:
+    controller: namespace-controller
+rules:
+  - apiGroups:
+      - gial.lblw.dev
+    verbs:
+      - update
+      - patch
+      - delete
+    resourceNames:
+      - "namespace-sample"
+    resources:
+      - lnamespace

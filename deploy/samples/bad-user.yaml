@@ -1,0 +1,12 @@
+apiVersion: gial.lblw.dev/v1beta1
+kind: LNamespace
+metadata:
+  name: namespace-sample
+spec:
+  billing:
+    budget: "1000.0"
+  users:
+    - name: alice@loblaw.ca
+      kind: User
+    - name: Bob@loblaw.ca
+      kind: User

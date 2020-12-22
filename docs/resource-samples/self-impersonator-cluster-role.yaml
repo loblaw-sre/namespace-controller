@@ -1,0 +1,16 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: john-impersonator
+  labels:
+    controller: namespace-controller
+rules:
+  - apiGroups:
+      - ""
+    verbs:
+      - "impersonate"
+    resourceNames:
+      - "john" #should be the user themselves
+    resources:
+      - "users"

@@ -1,0 +1,164 @@
+
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.4.1
+  creationTimestamp: null
+  name: lnamespaces.gial.lblw.dev
+spec:
+  group: gial.lblw.dev
+  names:
+    kind: LNamespace
+    listKind: LNamespaceList
+    plural: lnamespaces
+    shortNames:
+    - lns
+    singular: lnamespace
+  scope: Cluster
+  versions:
+  - name: v1beta1
+    schema:
+      openAPIV3Schema:
+        description: LNamespace is the Schema for the namespaces API
+        properties:
+          apiVersion:
+            description: 'APIVersion defines the versioned schema of this representation
+              of an object. Servers should convert recognized schemas to the latest
+              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            type: string
+          kind:
+            description: 'Kind is a string value representing the REST resource this
+              object represents. Servers may infer this from the endpoint the client
+              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: LNamespaceSpec defines the desired state of LNamespace
+            properties:
+              billing:
+                additionalProperties:
+                  type: string
+                description: Billing holds billing information.
+                type: object
+              istioRevision:
+                description: IstioRevision determines which istio control plane to
+                  associate with. Defaults to cluster default.
+                type: string
+              managers:
+                description: Managers are bound only
+                items:
+                  description: Subject contains a reference to the object or user
+                    identities a role binding applies to.  This can either hold a
+                    direct API object reference, or a value for non-objects such as
+                    user and group names.
+                  properties:
+                    apiGroup:
+                      description: APIGroup holds the API group of the referenced
+                        subject. Defaults to "" for ServiceAccount subjects. Defaults
+                        to "rbac.authorization.k8s.io" for User and Group subjects.
+                      type: string
+                    kind:
+                      description: Kind of object being referenced. Values defined
+                        by this API group are "User", "Group", and "ServiceAccount".
+                        If the Authorizer does not recognized the kind value, the
+                        Authorizer should report an error.
+                      type: string
+                    name:
+                      description: Name of the object being referenced.
+                      type: string
+                    namespace:
+                      description: Namespace of the referenced object.  If the object
+                        kind is non-namespace, such as "User" or "Group", and this
+                        value is not empty the Authorizer should report an error.
+                      type: string
+                  required:
+                  - kind
+                  - name
+                  type: object
+                type: array
+              sudoers:
+                description: Sudoers holds a list of names of users or groups allowed
+                  to sudo.
+                items:
+                  description: Subject contains a reference to the object or user
+                    identities a role binding applies to.  This can either hold a
+                    direct API object reference, or a value for non-objects such as
+                    user and group names.
+                  properties:
+                    apiGroup:
+                      description: APIGroup holds the API group of the referenced
+                        subject. Defaults to "" for ServiceAccount subjects. Defaults
+                        to "rbac.authorization.k8s.io" for User and Group subjects.
+                      type: string
+                    kind:
+                      description: Kind of object being referenced. Values defined
+                        by this API group are "User", "Group", and "ServiceAccount".
+                        If the Authorizer does not recognized the kind value, the
+                        Authorizer should report an error.
+                      type: string
+                    name:
+                      description: Name of the object being referenced.
+                      type: string
+                    namespace:
+                      description: Namespace of the referenced object.  If the object
+                        kind is non-namespace, such as "User" or "Group", and this
+                        value is not empty the Authorizer should report an error.
+                      type: string
+                  required:
+                  - kind
+                  - name
+                  type: object
+                type: array
+              users:
+                description: Developers holds a list of regular developers allowed
+                  to edit common resources.
+                items:
+                  description: Subject contains a reference to the object or user
+                    identities a role binding applies to.  This can either hold a
+                    direct API object reference, or a value for non-objects such as
+                    user and group names.
+                  properties:
+                    apiGroup:
+                      description: APIGroup holds the API group of the referenced
+                        subject. Defaults to "" for ServiceAccount subjects. Defaults
+                        to "rbac.authorization.k8s.io" for User and Group subjects.
+                      type: string
+                    kind:
+                      description: Kind of object being referenced. Values defined
+                        by this API group are "User", "Group", and "ServiceAccount".
+                        If the Authorizer does not recognized the kind value, the
+                        Authorizer should report an error.
+                      type: string
+                    name:
+                      description: Name of the object being referenced.
+                      type: string
+                    namespace:
+                      description: Namespace of the referenced object.  If the object
+                        kind is non-namespace, such as "User" or "Group", and this
+                        value is not empty the Authorizer should report an error.
+                      type: string
+                  required:
+                  - kind
+                  - name
+                  type: object
+                type: array
+            type: object
+          status:
+            description: LNamespaceStatus defines the observed state of LNamespace
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
+status:
+  acceptedNames:
+    kind: ""
+    plural: ""
+  conditions: []
+  storedVersions: []

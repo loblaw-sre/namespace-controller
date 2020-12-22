@@ -1,0 +1,23 @@
+namePrefix: namespace-controller-
+namespace: namespace-controller-system
+resources:
+  - ../../default
+
+patchesStrategicMerge:
+  - workload-identity-service-account.yaml
+
+configMapGenerator:
+  - name: bigquery-config
+    namespace: system
+    literals:
+      - NC_BIGQUERY_DATASET_NAME=REDACTED # what dataset should hold the billing annotations? TODO(rsong): seed with opensource context
+      - NC_PROJECT_ID=REDACTED # what's the ID of your playground project? TODO(rsong): seed with opensource context
+      - NC_BIGQUERY_TABLE_NAME=ns_labels # what's table should hold the billing annotations?
+  - name: istio-config
+    namespace: system
+    literals:
+      - NC_DEFAULT_ISTIO_REVISION=istio-version-1 # what's the istio revision that was installed?
+
+images:
+  - name: controller
+    newName: gcr.io/REDACTED/namespace-controller #TODO(rsong): seed with opensource context

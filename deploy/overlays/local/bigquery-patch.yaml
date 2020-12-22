@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: controller-manager
+  namespace: system
+spec:
+  template:
+    spec:
+      containers:
+        - name: manager
+          volumeMounts:
+            - name: google-sa
+              mountPath: "/credentials/"
+      volumes:
+        - name: google-sa
+          secret:
+            secretName: bigquery-credentials

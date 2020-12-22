@@ -1,0 +1,29 @@
+
+---
+apiVersion: admissionregistration.k8s.io/v1
+kind: MutatingWebhookConfiguration
+metadata:
+  creationTimestamp: null
+  name: mutating-webhook-configuration
+webhooks:
+- admissionReviewVersions:
+  - v1
+  - v1beta1
+  clientConfig:
+    service:
+      name: webhook-service
+      namespace: system
+      path: /mutate-gial-lblw-dev-v1beta1-lnamespace
+  failurePolicy: Fail
+  name: mlnamespace.kb.io
+  rules:
+  - apiGroups:
+    - gial.lblw.dev
+    apiVersions:
+    - v1beta1
+    operations:
+    - CREATE
+    - UPDATE
+    resources:
+    - lnamespaces
+  sideEffects: None

@@ -1,0 +1,16 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: namespace-sample-sudoer
+  labels:
+    controller: namespace-controller
+rules:
+  - apiGroups:
+      - ""
+    verbs:
+      - "impersonate"
+    resourceNames:
+      - "namespace-sample-sudoers"
+    resources:
+      - "groups"

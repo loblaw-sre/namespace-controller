@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - manager.yaml
+patchesStrategicMerge:
+  - manager_auth_proxy_patch.yaml
+  - manager_webhook_patch.yaml
+  # - istio-revision-config.yaml
+images:
+  - name: controller
+    newTag: 0.2.0
